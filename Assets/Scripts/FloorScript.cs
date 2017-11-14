@@ -13,6 +13,7 @@ public class FloorScript : MonoBehaviour {
         {
             GameManager.DecreaseLives();
             Debug.Log("ahora son " + GameManager.GetLives());
+            
         }
     }
 	// Use this for initialization

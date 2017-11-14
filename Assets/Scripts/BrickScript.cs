@@ -20,11 +20,14 @@ public class BrickScript : MonoBehaviour {
     void OnCollisionExit2D(Collision2D col){
 
             this.health--;
+
+        if (this.health == 0)
+        {
             gameObject.SetActive(false);
             GameManager.score += 15;
             GameManager.blocksAlive--;
             GameManager.statusText.text = string.Format("Blocks restantes: {0}  Score: {1}", GameManager.blocksAlive, GameManager.score);
             Debug.Log("score =" + GameManager.score + " blocksAlive =" + GameManager.blocksAlive);
-        
+        }
     }
 }

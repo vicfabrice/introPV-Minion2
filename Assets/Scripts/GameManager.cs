@@ -27,16 +27,16 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         
-        //Check if instance already exists
+        //Chequea si la instancia existe o no 
         if (instance == null)
 
-            //if not, set instance to this
+            //si es no, la setea
             instance = this;
 
-        //If instance already exists and it's not this:
+        //si si, la destruye 
         else if (instance != this)
 
-            //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+            
             Destroy(gameObject);
 
         //Sets this to not be destroyed when reloading scene

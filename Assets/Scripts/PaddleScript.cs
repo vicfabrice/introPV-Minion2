@@ -31,7 +31,7 @@ public class PaddleScript : MonoBehaviour {
 
         if (Input.GetButtonDown("Jump"))
          {
-                GameManager.Ball.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, GameManager.Ball.GetBallForce()));
+                GameManager.Ball.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, GameManager.Ball.SpeedY));
          }
         
     
