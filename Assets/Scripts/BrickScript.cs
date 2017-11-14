@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,12 +9,19 @@ public class BrickScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        
+
+        InitializeColor();
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void InitializeColor()
+    {
+        //inicializo los bloques en diferentes colores
+        GetComponent<Renderer>().material.color = new Color(UnityEngine.Random.Range(0.0f, 1.0f), UnityEngine.Random.Range(0.0f, 1.0f), UnityEngine.Random.Range(0.0f, 1.0f));
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
@@ -26,7 +34,7 @@ public class BrickScript : MonoBehaviour {
             gameObject.SetActive(false);
             GameManager.score += 15;
             GameManager.blocksAlive--;
-            GameManager.statusText.text = string.Format("Blocks restantes: {0}  Score: {1}", GameManager.blocksAlive, GameManager.score);
+            //GameManager.statusText.text = string.Format("Blocks restantes: {0}  Score: {1}", GameManager.blocksAlive, GameManager.score);
             Debug.Log("score =" + GameManager.score + " blocksAlive =" + GameManager.blocksAlive);
         }
     }
