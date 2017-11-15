@@ -2,22 +2,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BrickScript : MonoBehaviour {
 
-    public int health = 3;
+    public int health;
+    private int baseHealth;
+    Image img;
 
 	// Use this for initialization
 	void Start () {
 
-        InitializeColor();
+        baseHealth = health;
+        img = GetComponent<Image>();
 
     }
 
-    private void InitializeColor()
+    void resetHealth()
     {
-        //inicializo los bloques en diferentes colores
-        GetComponent<Renderer>().material.color = new Color(UnityEngine.Random.Range(0.0f, 1.0f), UnityEngine.Random.Range(0.0f, 1.0f), UnityEngine.Random.Range(0.0f, 1.0f));
+        health = baseHealth;
     }
 
     // Update is called once per frame
@@ -27,7 +30,14 @@ public class BrickScript : MonoBehaviour {
 
     void OnCollisionExit2D(Collision2D col){
 
-            this.health--;
+        this.health--;
+
+        if (this.health == 1)
+        {
+            img.color = new Color(UnityEngine.Random.Range(0.0f, 1.0f), UnityEngine.Random.Range(0.0f, 1.0f), UnityEngine.Random.Range(0.0f, 1.0f));
+            //gameObject.GetComponent<Image>().color = new Color32(255, 255, 225, 100);
+            //GetComponent<Renderer>().material.color = new Color(UnityEngine.Random.Range(0.0f, 1.0f), UnityEngine.Random.Range(0.0f, 1.0f), UnityEngine.Random.Range(0.0f, 1.0f));
+        }
 
         if (this.health == 0)
         {
@@ -35,7 +45,7 @@ public class BrickScript : MonoBehaviour {
             GameManager.score += 15;
             GameManager.blocksAlive--;
             //GameManager.statusText.text = string.Format("Blocks restantes: {0}  Score: {1}", GameManager.blocksAlive, GameManager.score);
-            Debug.Log("score =" + GameManager.score + " blocksAlive =" + GameManager.blocksAlive);
+            Debug.Log("score =" + GameManager.score + " blocksAlive =" + GameManager.blocksAlive + " lives =" + GameManager.lives);
         }
     }
 }

@@ -4,25 +4,16 @@ using UnityEngine;
 
 public class FloorScript : MonoBehaviour {
 
-    
-    
-    
+    //le paso el GM 
+    public GameManager gameManager;
+
     void OnCollisionEnter2D(Collision2D col)
     {
-        if(col.gameObject.tag == "Ball")
+        if (col.gameObject.tag == "Ball")
         {
-            GameManager.DecreaseLives();
-            Debug.Log("ahora son " + GameManager.GetLives());
-            
+            gameManager.DecreaseLives();
+            Debug.Log("ahora son " + GameManager.lives);
+
         }
     }
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

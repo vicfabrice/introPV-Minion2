@@ -5,39 +5,47 @@ using UnityEngine;
 public class PaddleScript : MonoBehaviour {
 
     //velocidad del palito
-    public float paddleSpeed = 10f;
-    
-    public Transform TheCanvas;
-    
-
-    
+    public float speed = 10f;
+    private Vector3 paddlePosition;
+    public float limites;
 
     // Use this for initialization
     void Start() {
-        
+
+        // get the initial position of the game object
+        restartPaddle();
+
     }
 
+    void restartPaddle()
+    {
+        paddlePosition = gameObject.transform.position;
+    }
     
     // Update is called once per frame
-    
     void Update() {
 
-        // transform.Translate(paddleSpeed * Time.deltaTime * Input.GetAxis("Horizontal"), 0, 0);
-        //Todo esto de abajo para que la barrita no se vaya del juego
-        float xPos = transform.position.x + (Input.GetAxis("Horizontal") * paddleSpeed);
+        float xPos = transform.position.x + (Input.GetAxis("Horizontal") * speed);
         var pos = transform.position;
         pos.x = Mathf.Clamp(xPos, -5.5f, 5.5f);
         transform.position = pos;
 
         if (Input.GetButtonDown("Jump"))
-         {
-                GameManager.Ball.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, GameManager.Ball.SpeedY));
-         }
-        
-    
+        {
+            GameManager.Ball.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, GameManager.Ball.SpeedY));
+        }
+        // leave the game
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
+
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+}
+
+    /*private void OnCollisionEnter2D(Collision2D collision)
     {
         foreach (ContactPoint2D contact in collision.contacts)
         {
@@ -47,5 +55,6 @@ public class PaddleScript : MonoBehaviour {
                 contact.otherCollider.GetComponent<Rigidbody2D>().AddForce(new Vector2(200 * calc, 0));
             }
         }
-    }
-}
+    }*/
+
+    
